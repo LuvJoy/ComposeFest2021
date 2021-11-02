@@ -37,7 +37,7 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Text PreView")
 @Composable
 fun DefaultPreview() {
     BasicsCodelab_Week1Theme {
