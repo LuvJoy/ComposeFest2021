@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import yapp.android1.basicscodelab_week1.ui.theme.BasicsCodelab_Week1Theme
 import yapp.android1.basicscodelab_week1.ui.theme.Shapes
 
@@ -34,7 +36,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    Surface(color = MaterialTheme.colors.primary) {
+        Text(
+            text = "Hello $name!",
+            modifier = Modifier.padding(24.dp)
+        )
+    }
 }
 
 @Preview(showBackground = true, name = "Text PreView")
