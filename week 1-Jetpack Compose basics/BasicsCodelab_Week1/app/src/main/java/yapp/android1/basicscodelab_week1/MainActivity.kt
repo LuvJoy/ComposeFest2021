@@ -4,14 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,17 +27,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Surface(color = MaterialTheme.colors.primary) {
-        Text(
-            text = "Hello $name!",
-            modifier = Modifier.padding(24.dp)
-        )
-    }
-}
-
-@Preview(showBackground = true, name = "Text PreView")
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     BasicsCodelab_Week1Theme {
@@ -50,8 +36,32 @@ fun DefaultPreview() {
 }
 
 @Composable
-private fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Greeting("Android")
+fun Greeting(name: String) {
+    Surface(
+        color = MaterialTheme.colors.primary,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier.weight(1F)) {
+                Text(text = "Hello")
+                Text(text = name)
+            }
+            
+            OutlinedButton(
+                onClick = {  },
+                modifier = Modifier.align(Alignment.CenterVertically)
+            ) {
+                Text(text = "Show More")
+            }
+        }
+    }
+}
+
+@Composable
+private fun MyApp(names: List<String> = listOf("Jetpack", "Compose")) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        for(name in names) {
+            Greeting(name)
+        }
     }
 }
