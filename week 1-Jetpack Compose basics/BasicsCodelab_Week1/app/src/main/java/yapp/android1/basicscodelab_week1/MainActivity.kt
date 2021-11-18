@@ -11,6 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -38,6 +40,15 @@ fun DefaultPreview() {
 }
 
 @Composable
+private fun Greetings(names: List<String> = listOf("wonderful", "compose")) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
+        }
+    }
+}
+
+@Composable
 fun Greeting(name: String) {
     val expanded = remember { mutableStateOf(false) }
     val extraPadding = if (expanded.value) 48.dp else 0.dp
@@ -48,7 +59,8 @@ fun Greeting(name: String) {
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
-                modifier = Modifier.weight(1F)
+                modifier = Modifier
+                    .weight(1F)
                     .padding(bottom = extraPadding)
 
             ) {
@@ -66,10 +78,41 @@ fun Greeting(name: String) {
 }
 
 @Composable
-private fun MyApp(names: List<String> = listOf("Jetpack", "Compose")) {
-    Column(modifier = Modifier.padding(vertical = 4.dp)) {
-        for (name in names) {
-            Greeting(name)
+private fun MyApp() {
+
+    var shouldShowOnBoarding by remember { mutableStateOf(true) }
+
+    if (shouldShowOnBoarding) {
+        OnBoardingScreen(onContinueClicked = { shouldShowOnBoarding = false})
+    } else {
+        Greetings()
+    }
+}
+
+@Composable
+fun OnBoardingScreen(onContinueClicked: () -> Unit) {
+
+    Surface {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("Welcom to the Basics CodeLabs")
+            Button(
+                modifier = Modifier.padding(vertical = 24.dp),
+                onClick = onContinueClicked
+            ) {
+                Text(text = "Continue")
+            }
         }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 320, heightDp = 320)
+@Composable
+fun OnBoardingPreview() {
+    BasicsCodelab_Week1Theme {
+        OnBoardingScreen(onContinueClicked = {})
     }
 }
