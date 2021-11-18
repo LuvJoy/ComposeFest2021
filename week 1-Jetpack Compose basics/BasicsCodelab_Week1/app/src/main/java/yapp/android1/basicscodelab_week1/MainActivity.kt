@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -82,10 +83,10 @@ fun Greeting(name: String) {
 @Composable
 private fun MyApp() {
 
-    var shouldShowOnBoarding by remember { mutableStateOf(true) }
+    var shouldShowOnBoarding by rememberSaveable { mutableStateOf(true) }
 
     if (shouldShowOnBoarding) {
-        OnBoardingScreen(onContinueClicked = { shouldShowOnBoarding = false})
+        OnBoardingScreen(onContinueClicked = { shouldShowOnBoarding = false} )
     } else {
         Greetings()
     }
