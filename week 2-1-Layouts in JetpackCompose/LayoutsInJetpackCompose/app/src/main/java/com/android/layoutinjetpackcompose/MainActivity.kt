@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -42,24 +44,47 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LayoutInJetpackComposeTheme {
-        Greeting("Android")
-    }
-}
-
 @Preview
 @Composable
 fun PhotograhperCardPreview() {
     LayoutInJetpackComposeTheme {
         PhotographerCard()
+    }
+}
+
+@Preview
+@Composable
+fun LayoutsCodeLabPreview() {
+    LayoutInJetpackComposeTheme {
+        LayoutsCodelab()
+    }
+}
+
+@Composable
+fun LayoutsCodelab() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Android Great Again")
+                },
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.Favorite, contentDescription = null)
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        BodyContent(modifier = Modifier.padding(innerPadding))
+    }
+}
+
+@Composable
+fun BodyContent(modifier: Modifier) {
+    Column(modifier = modifier) {
+        Text(text = "Hi there")
+        Text(text = "Thanks for going through the Layouts codelab")
     }
 }
 
